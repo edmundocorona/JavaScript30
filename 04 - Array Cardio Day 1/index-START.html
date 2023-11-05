@@ -38,28 +38,58 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const filterList = inventors.filter((inventor) => inventor.year >= 1500 && inventor.year < 1600);
+    console.log(filterList);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventorsName = inventors.map((inventor) => inventor.first + ' ' + inventor.last);
+    console.log(inventorsName);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortInventors = inventors.sort((a, b) => a.year - b.year);
+    console.log(sortInventors);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const INITIAL_VALUE = 0;
+    const yearsLived = inventors.reduce((accumulator, currentValue) => accumulator + (currentValue.passed - currentValue.year), INITIAL_VALUE);
+    console.log(yearsLived);
 
     // 5. Sort the inventors by years lived
+    const inventorsByYearsLived = inventors.sort((a, b) => (a.passed - a.year) - (b.passed - b.year));
+    console.table(inventorsByYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const list = document.querySelector('.mw-category');
+    // const links = list.querySelectorAll('a');
+    // const arrayLinks = Array.from(links);
+    // const deList = arrayLinks.map((link) => link.text).filter((text) => text.includes('de')); 
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.sort((a, b) => a > b ? 1 : -1);
+    console.log(sortedPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const sumUP = {};
+    data.forEach((value) => value in sumUP ? sumUP[value]++ : sumUP[value] = 1)
+    console.log(sumUP)
+
+    const sumUPwithReduce = data.reduce((accumulator, currentValue) => {
+      if (currentValue in accumulator) {
+        accumulator[currentValue]++     
+      } else {
+        accumulator[currentValue] = 1;
+      }
+      return accumulator;
+    }, {});
+    console.log(sumUPwithReduce);
 
   </script>
 </body>
